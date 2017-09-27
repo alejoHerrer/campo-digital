@@ -38,6 +38,9 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Agricultor.findByZona", query = "SELECT a FROM Agricultor a WHERE a.zona = :zona")})
 public class Agricultor implements Serializable {
 
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "recursos")
+    private Collection<Prestamo> prestamoCollection;
+
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "agricultor")
     private Collection<Parcela> parcelaCollection;
 
@@ -167,6 +170,15 @@ public class Agricultor implements Serializable {
 
     public void setParcelaCollection(Collection<Parcela> parcelaCollection) {
         this.parcelaCollection = parcelaCollection;
+    }
+
+    @XmlTransient
+    public Collection<Prestamo> getPrestamoCollection() {
+        return prestamoCollection;
+    }
+
+    public void setPrestamoCollection(Collection<Prestamo> prestamoCollection) {
+        this.prestamoCollection = prestamoCollection;
     }
     
 }
